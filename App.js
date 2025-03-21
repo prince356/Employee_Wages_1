@@ -4,11 +4,11 @@ const IS_FULL_TIME = 2;
 const PART_TIME_HOURS = 4;
 const FULL_TIME_HOURS = 8;
 const WAGE_PER_HOUR = 20;
-const Num_OF_WORKING_DAYS = 10;
-const MAX_HRS_IN_MONTH = 100;
+const Num_OF_WORKING_DAYS = 20;
+const MAX_HRS_IN_MONTH = 160;
 let totalEmpHrs = 0;
 let totalWorkingDays = 0;
-
+let empDailyWagearr = new Array();
 let empCheck = Math.floor(Math.random()* 10) % 2;
 
 if(empCheck == IS_Absent){
@@ -29,13 +29,18 @@ function getWorkingHours(empCheck){
             return 0;
     }
 }
-let empHrs = 0;
+
+function calcDailyWage(empHrs) {
+    return empHrs * WAGE_PER_HOUR ;
+}
 
 while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < Num_OF_WORKING_DAYS) {
     totalWorkingDays++;
     empCheck = Math.floor(Math.random()* 10) % 3;
-    totalEmpHrs += getWorkingHours(empCheck);
+    let empHrs = getWorkingHours(empCheck)
+    totalEmpHrs += empHrs
+    empDailyWagearr.push(calcDailyWage(empHrs))
 }
 
 let empWage = totalEmpHrs * WAGE_PER_HOUR ;
-console.log("UC5 - Total Days:- " + totalWorkingDays + " Total Hrs: " + totalEmpHrs + " Emp Wage: " + empWage);
+console.log("UC6 - Total Days:- " + totalWorkingDays + " Total Hrs: " + totalEmpHrs + " Emp Wage: " + empWage);
